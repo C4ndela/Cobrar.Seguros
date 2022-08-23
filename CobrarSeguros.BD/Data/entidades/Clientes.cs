@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 namespace CobrarSeguros.BD.Data.entidades
 {
     [Index(nameof(DNI), Name = "ClienteDNI_UQ", IsUnique = true)]
-    public class Clientes : EntityBase 
+    public class Clientes : EntityBase
     {
         [Required]
-        [MaxLength (8, ErrorMessage = "El DNI de la persona no debe superar los {1} caracteres")]
         public int DNI { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "El Nombre de la persona no debe superar los {1} caracteres")]
@@ -28,7 +27,9 @@ namespace CobrarSeguros.BD.Data.entidades
         [MaxLength(150, ErrorMessage = "El domicilio de la persona no debe superar los {1} caracteres")]
         public string Domicilio { get; set; }
         [Required]
-        [MaxLength(20, ErrorMessage = "El numero de telefono de la persona no debe superar los {1} caracteres")]
         public int nroTelfonico { get; set; }
+
+        public List<Poliza> Poliza { get; set; }
+
     }
 }
