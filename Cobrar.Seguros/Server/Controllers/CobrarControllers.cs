@@ -12,18 +12,34 @@ namespace Cobrar.Seguros.Server.Controllers
 
     public class CobrarControllers : ControllerBase
     {
-        private readonly BDcontext contex;
+        private readonly BDcontext context;
 
-        public CobrarControllers (BDcontext contex )
+        public CobrarControllers(BDcontext context)
         {
-            this.contex = contex;
+            this.context = context;
         }
+
+
+        #region Get
 
         [HttpGet]
         public async Task<ActionResult<List<Poliza>>> Get()
         {
-            return await contex.Polizas.ToListAsync(); 
+            return await context.Polizas.ToListAsync();
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Poliza>> Get(int id)
+        {
+            var poliza= await context.Polizas.Where
+                                   (p => p.ID == id).FirstOrDefaultAsync();
+            if (poliza == null)
+            {
+                return NotFound($"No existe una poliza de Id= {id}");
+            }
+            return poliza; 
+        }
+
+        #endregion
     }
 }
