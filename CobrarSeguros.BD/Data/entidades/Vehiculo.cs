@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CobrarSeguros.BD.Data.entidades
 
 { 
-     [Index(nameof(Patente), Name = "Vehiculo_UQ", IsUnique = true)]
+     [Index(nameof (Patente), Name = "Vehiculo_UQ", IsUnique = true)]
        public class Vehiculo : EntityBase
        {
          [Required]
@@ -23,9 +23,10 @@ namespace CobrarSeguros.BD.Data.entidades
           [MaxLength(50, ErrorMessage = "El modelo de vehiculo no debe superar los {1} caracteres")]
            public string Modelo { get; set; }
 
-            [Required(ErrorMessage = "Cliente es obligatorio")]
-           public int ClienteId { get; set; }
-           public Clientes Cliente { get; set; }
-           public List<Poliza> Poliza { get; set; }
+        [Required(ErrorMessage = "Cliente es obligatorio")]
+        public int ClienteId { get; set; }
+        public Clientes Cliente { get; set; }
+        public List<Poliza> Poliza { get; set; }
+
        }
 }

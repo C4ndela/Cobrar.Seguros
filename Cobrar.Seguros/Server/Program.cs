@@ -1,11 +1,14 @@
 using CobrarSeguros.BD.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddControllersWithViews().AddJsonOptions(
+   x => x.JsonSerializerOptions.ReferenceHandler  = ReferenceHandler.IgnoreCycles); //CONTROL RECURSIVIDIDAD ENTRE TABLA VEHICULO Y POLIZA
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 var conn = builder.Configuration.GetConnectionString("con");

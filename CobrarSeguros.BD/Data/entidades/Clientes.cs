@@ -28,8 +28,6 @@ namespace CobrarSeguros.BD.Data.entidades
         public string Domicilio { get; set; }
         [Required]
         public int nroTelfonico { get; set; }
-
-        public List<Poliza> Poliza { get; set; }
-
+        public Vehiculo Vehiculos { get; set; }
     }
 }
