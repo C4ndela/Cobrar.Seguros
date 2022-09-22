@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CobrarSeguros.BD.Data.entidades
 
 { 
-     [Index(nameof (Patente), Name = "Vehiculo_UQ", IsUnique = true)]
+     [Index(nameof (PolizaID), nameof (Patente), Name = "Vehiculo.PolizaID_UQ", IsUnique = true)]
 
        public class Vehiculo : EntityBase
        {
@@ -24,7 +24,13 @@ namespace CobrarSeguros.BD.Data.entidades
          [Required]
         public int Sumasegurada { get; set; }
         [Required(ErrorMessage = "Cliente es obligatorio")]
-        public int ClienteId { get; set; }
-        public Poliza poliza { get; set; }
+
+
+
+        public int ClienteID { get; set; }
+        public Clientes Clientes {get; set; } 
+
+        public int PolizaID { get; set; }
+        public Poliza Poliza { get; set; }
        }
 }

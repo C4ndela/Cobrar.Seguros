@@ -26,14 +26,27 @@ namespace Cobrar.Seguros.Server.Controllers
         {
             var Vehiculo = await context.Vehiculos.Where
                                    (p => p.Patente == Patente)
-                                   .Include(po => po.poliza).FirstOrDefaultAsync();
+                                   .Include(po => po.Poliza).FirstOrDefaultAsync();
             if (Vehiculo == null)
             {
                 return NotFound($"No existe un vehiculo con patente= {Patente}");
             }
             return Vehiculo;
         }
-            #endregion
+
+        //[HttpGet("/Clientes")]
+        //public async Task<ActionResult<Vehiculo>> VehiculoPorClienteID(string ClienteID)
+        //{
+        //    var Vehiculo = await context.Vehiculos.Where
+        //                           (e => e.ClienteID == ClienteID)
+        //                           .Include(po => po.Poliza).FirstOrDefaultAsync();
+        //    if (Vehiculo == null)
+        //    {
+        //        return NotFound($"No existe un vehiculo con patente= {ClienteID}");
+        //    }
+        //    return Vehiculo;
+        //}
+        #endregion
 
         #region post
         [HttpPost]
@@ -106,7 +119,7 @@ namespace Cobrar.Seguros.Server.Controllers
             }
             catch
             {
-                return BadRequest($"Lso datos no han sido eliminados"); //AGREGAR (e.Message)
+                return BadRequest($"Los datos no han sido eliminados"); //AGREGAR (e.Message)
             }
         }
 

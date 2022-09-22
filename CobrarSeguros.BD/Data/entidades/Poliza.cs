@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace CobrarSeguros.BD.Data.entidades
 {
-    [Index( nameof(Vehiculos), Name = "PolizadeVehiculo_UQ", IsUnique = true)]
+    [Index( nameof(VehiculosID), Name = "Poliza.VehiculoID_UQ", IsUnique = true)]
     public class Poliza : EntityBase
     {
-
         [Required]
         [MaxLength(20, ErrorMessage = "El numero de poliza es obligatorio")]
         public string nroPoliza { get; set; }
@@ -28,6 +27,8 @@ namespace CobrarSeguros.BD.Data.entidades
         [MaxLength(20, ErrorMessage = "El periodo de poliza no debe superar los {1} caracteres")]
         public string periodoPoliza { get; set; }
 
+
         public Vehiculo Vehiculos { get; set; }
+        public int VehiculosID { get; set; } 
     }
 }
