@@ -19,42 +19,21 @@ namespace Cobrar.Seguros.Server.Controllers
             this.context = context;
         }
 
-
         #region Get
 
-        [HttpGet]
-        public async Task<ActionResult<List<Vehiculo>>> Get()
-        {
-            return await context.Vehiculos.ToListAsync();
-        }
-
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Vehiculo>> Get(int id)
-        {
-            var Vehiculo = await context.Vehiculos.Where
-                                   (p => p.ID == id).FirstOrDefaultAsync();
-            if (Vehiculo == null)
-            {
-                return NotFound($"No existe vehiculo de Id= {id}");
-            }
-            return Vehiculo; 
-        }
-
-        [HttpGet("{VehiculoPorPatente/{Patente}")]
+        [HttpGet("/Patente")]
         public async Task<ActionResult<Vehiculo>> VehiculoPorPatente(string Patente)
         {
             var Vehiculo = await context.Vehiculos.Where
                                    (p => p.Patente == Patente)
-                                   .Include (po => po.Poliza).FirstOrDefaultAsync();
-
+                                   .Include(po => po.poliza).FirstOrDefaultAsync();
             if (Vehiculo == null)
             {
                 return NotFound($"No existe un vehiculo con patente= {Patente}");
             }
             return Vehiculo;
         }
-
-        #endregion
+            #endregion
 
         #region post
         [HttpPost]
@@ -75,7 +54,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region put
 
-        //[HttpPut("pantete:string")]
+        //[HttpPut("Patente:string")]
 
         //public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
         //{
@@ -91,11 +70,11 @@ namespace Cobrar.Seguros.Server.Controllers
         //        return NotFound("No existe vehiculo a modificar");
         //    }
 
-        //    auto.Sumasegurada = Vehiculo.Sumasegurada;
+        //    auto.patente = Vehiculo.Patente;
 
         //    try
         //    {
-        //        context.Vehiculos.Update(auto);
+        //        context.Vehiculos.Update(Patente);
         //        context.SaveChanges();
         //        return Ok();
         //    }
@@ -109,29 +88,28 @@ namespace Cobrar.Seguros.Server.Controllers
         #endregion
 
         #region delete
-        [HttpDelete ("{id:int}")]
+        [HttpDelete("{id:int}")]
 
-        public ActionResult Delete (int id)
+        public ActionResult Delete(int id)
         {
             var auto = context.Vehiculos.Where(x => x.ID == id).FirstOrDefault();
             if (auto == null)
             {
-                return NotFound($"El registro {id} no fue encontrado"); 
+                return NotFound($"El registro {id} no fue encontrado");
             }
 
             try
             {
-                context.Vehiculos.Remove(auto); 
+                context.Vehiculos.Remove(auto);
                 context.SaveChanges();
-                return Ok($"El registro {auto.Sumasegurada} ha sido borrado."); 
+                return Ok($"El registro {auto.Sumasegurada} ha sido borrado.");
             }
-            catch 
+            catch
             {
                 return BadRequest($"Lso datos no han sido eliminados"); //AGREGAR (e.Message)
             }
         }
 
         #endregion
-
     }
 }
