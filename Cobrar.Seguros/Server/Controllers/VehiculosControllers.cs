@@ -19,6 +19,33 @@ namespace Cobrar.Seguros.Server.Controllers
             this.context = context;
         }
 
+
+        #region post
+        [HttpPost]
+        public async Task<ActionResult<Vehiculo>> Post(Vehiculo vehiculo)
+        {
+            try
+            {
+                //var clienteActivoID = User.Claims.Where(c => c.Type == "clienteActivoID").Select(x => x.Value).FirstOrDefault();
+
+                //if (clienteActivoID == null)
+                //    return NotFound("No se puede agregar el vehiculo");
+
+                ///*usa la cuenta activa para la carga del vehiculo bajo esa cuenta*/
+                //vehiculo.ClienteID = clienteActivoID;
+
+
+                context.Vehiculos.Add(vehiculo);
+                await context.SaveChangesAsync();
+                return vehiculo;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        #endregion
+
         #region Get
 
         [HttpGet("/Patente")]
@@ -46,23 +73,6 @@ namespace Cobrar.Seguros.Server.Controllers
         //    }
         //    return Vehiculo;
         //}
-        #endregion
-
-        #region post
-        [HttpPost]
-        public async Task<ActionResult<Vehiculo>> Post(Vehiculo vehiculo)
-        {
-            try
-            {
-                context.Vehiculos.Add(vehiculo);
-                await context.SaveChangesAsync();
-                return vehiculo;
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
         #endregion
 
         #region put
@@ -124,5 +134,7 @@ namespace Cobrar.Seguros.Server.Controllers
         }
 
         #endregion
+
     }
+
 }

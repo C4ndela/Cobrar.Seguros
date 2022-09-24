@@ -23,10 +23,10 @@ namespace CobrarSeguros.BD.Data.entidades
          public int Año { get; set; }
          [Required]
         public int Sumasegurada { get; set; }
+        
+        
+        
         [Required(ErrorMessage = "Cliente es obligatorio")]
-
-
-
         public int ClienteID { get; set; }
         public Clientes Clientes {get; set; } 
 

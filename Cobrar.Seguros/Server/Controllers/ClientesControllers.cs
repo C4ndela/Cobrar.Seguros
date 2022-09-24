@@ -47,7 +47,7 @@ namespace Cobrar.Seguros.Server.Controllers
                                        .Include(po => po.Vehiculos).FirstOrDefaultAsync();
                 if (Vehiculo == null)
                 {
-                    return NotFound($"No existe un vehiculo con patente= {DNI}");
+                    return NotFound($"No existe un cleinte con DNI= {DNI}");
                 }
                 return Vehiculo;
             }
@@ -75,6 +75,26 @@ namespace Cobrar.Seguros.Server.Controllers
                     return BadRequest($"Los datos no han sido eliminados"); //AGREGAR (e.Message)
                 }
             }
+
+            #endregion
+
+            #region metodos
+
+            private bool UserExist(int DNI) //confirma si el usuario con DNI x existe
+            {
+                var user = context.Cliente.Where(u => u.DNI == DNI).FirstOrDefault();
+                if (user != null)
+                    return false;
+                return true;
+            }
+
+            //private bool UserExist  (int clienteID) // cpnfirma si existe un usuario por medio del id
+            //{
+            //    var user = context.Cliente.Where(u => u.ID == clienteID).FirstOrDefault();
+            //    if (user != null)
+            //        return false;
+            //    return true;
+            //}
 
             #endregion
         }

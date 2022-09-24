@@ -27,6 +27,10 @@ namespace CobrarSeguros.BD.Data.entidades
         [MaxLength(20, ErrorMessage = "El periodo de poliza no debe superar los {1} caracteres")]
         public string periodoPoliza { get; set; }
 
+        [Required]
+        public string vencimientoFactura { get; set; }
+
+
 
         public Vehiculo Vehiculos { get; set; }
         public int VehiculosID { get; set; } 
