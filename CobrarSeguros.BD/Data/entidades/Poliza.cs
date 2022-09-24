@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CobrarSeguros.BD.Data.entidades
 {
-    [Index( nameof(VehiculosID), Name = "Poliza.VehiculoID_UQ", IsUnique = true)]
+    [Index( nameof (VehiculoID), nameof (nroPoliza), Name = "Poliza.VehiculoID_UQ", IsUnique = true)]
     public class Poliza : EntityBase
     {
         [Required]
@@ -30,9 +31,10 @@ namespace CobrarSeguros.BD.Data.entidades
         [Required]
         public string vencimientoFactura { get; set; }
 
+        //[ForeignKey("Vehiculo")]
 
 
-        public Vehiculo Vehiculos { get; set; }
-        public int VehiculosID { get; set; } 
+        public Vehiculo Vehiculo { get; set; }
+        public int VehiculoID { get; set; } 
     }
 }

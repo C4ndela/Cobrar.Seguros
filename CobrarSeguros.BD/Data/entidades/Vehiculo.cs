@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,13 @@ using System.Threading.Tasks;
 namespace CobrarSeguros.BD.Data.entidades
 
 { 
-     [Index(nameof (PolizaID), nameof (Patente), Name = "Vehiculo.PolizaID_UQ", IsUnique = true)]
+     [Index( nameof(Patente), nameof(PolizaID), Name = "VehiculoID_UQ", IsUnique = true)]
 
        public class Vehiculo : EntityBase
        {
          [Required]
-         [MaxLength(8, ErrorMessage = "La patente del vehiculo no debe superar los {1} caracteres")]
-          public string Patente { get; set; }
+         [MaxLength(10, ErrorMessage = "La patente del vehiculo no debe superar los {1} caracteres")]
+         public string Patente { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "El modelo de vehiculo no debe superar los {1} caracteres")]
         public string Modelo { get; set; }
@@ -23,14 +24,14 @@ namespace CobrarSeguros.BD.Data.entidades
          public int Año { get; set; }
          [Required]
         public int Sumasegurada { get; set; }
-        
-        
-        
-        [Required(ErrorMessage = "Cliente es obligatorio")]
-        public int ClienteID { get; set; }
-        public Clientes Clientes {get; set; } 
 
-        public int PolizaID { get; set; }
+        //[ForeignKey("Poliza")]
+
+        public Clientes Clientes {get; set; }
+        public int ClientesID { get; set; }
+
         public Poliza Poliza { get; set; }
-       }
+        public int PolizaID { get; set; }
+
+    }
 }

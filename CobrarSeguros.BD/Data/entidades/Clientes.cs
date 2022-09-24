@@ -30,6 +30,7 @@ namespace CobrarSeguros.BD.Data.entidades
         public int nroTelfonico { get; set; }
 
 
+
         public List <Vehiculo> Vehiculos { get; set; }
     }
 }
