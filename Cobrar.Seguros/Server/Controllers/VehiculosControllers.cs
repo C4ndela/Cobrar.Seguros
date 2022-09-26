@@ -77,47 +77,47 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region put
 
-        [HttpPut("Patente:string")]
+        //[HttpPut("Patente:string")]
 
-        public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
-        {
-            if (Patente != vehiculo.Patente)
-            {
-                return BadRequest("Datos incorrectos");
-            }
+        //public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
+        //{
+        //    if (Patente != vehiculo.Patente)
+        //    {
+        //        return BadRequest("Datos incorrectos");
+        //    }
 
-            var autos = context.Vehiculos.Where(p => p.Patente == Patente);
+        //    var autos = context.Vehiculos.Where(p => p.Patente == Patente);
 
-            if (autos == null)
-            {
-                return NotFound("No existe vehiculo a modificar");
-            }
+        //    if (autos == null)
+        //    {
+        //        return NotFound("No existe vehiculo a modificar");
+        //    }
 
-            autos.Sumasegurada = vehiculo.Sumasegurada;
+        //    autos.Sumasegurada = vehiculo.Sumasegurada;
 
-            try
-            {
-                context.Vehiculos.Update(autos);
-                context.SaveChanges();
-                return Ok();
-            }
-            catch
-            {
-                return BadRequest($"Los datos no han sido actualizados por:{p.Message}");
-            }
-        }
+        //    try
+        //    {
+        //        context.Vehiculos.Update(autos);
+        //        context.SaveChanges();
+        //        return Ok();
+        //    }
+        //    catch
+        //    {
+        //        return BadRequest($"Los datos no han sido actualizados por:{p.Message}");
+        //    }
+        //}
 
         #endregion
 
         #region delete
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{patente:string}")]
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string Patente)
         {
-            var auto = context.Vehiculos.Where(x => x.Id == id).FirstOrDefault();
+            var auto = context.Vehiculos.Where(x => x.Patente == Patente).FirstOrDefault();
             if (auto == null)
             {
-                return NotFound($"El registro {id} no fue encontrado");
+                return NotFound($"El registro {Patente} no fue encontrado");
             }
 
             try

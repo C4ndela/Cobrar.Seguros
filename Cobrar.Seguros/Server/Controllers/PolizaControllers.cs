@@ -3,14 +3,14 @@ using CobrarSeguros.BD.Data.entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 namespace Cobrar.Seguros.Server.Controllers
 {
-    public class PolizaControllers
-    {
-        [ApiController]
-        [Route("api/Poliza")]
-        [Authorize]
+    [ApiController]
+    [Route("api/Poliza")]
+    [Authorize]
 
+ 
         public class PolizaControllrs : ControllerBase
         {
             private readonly BDcontext context;
@@ -69,14 +69,14 @@ namespace Cobrar.Seguros.Server.Controllers
         #endregion
 
             #region delete
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{nroPoliza:string}")]
 
-            public ActionResult Delete(int id)
+            public ActionResult Delete(string nroPoliza)
             {
-                var seguro = context.Polizas.Where(x => x.Id == id).FirstOrDefault();
+                var seguro = context.Polizas.Where(x => x.nroPoliza == nroPoliza).FirstOrDefault();
                 if (seguro == null)
                 {
-                    return NotFound($"El registro {id} no fue encontrado");
+                    return NotFound($"El registro {nroPoliza} no fue encontrado");
                 }
 
                 try
@@ -94,4 +94,3 @@ namespace Cobrar.Seguros.Server.Controllers
             #endregion
         }
     }
-}

@@ -13,7 +13,7 @@ namespace CobrarSeguros.BD.Data.entidades
      [Index( nameof(Patente), Name = "VehiculoID_UQ", IsUnique = true)]
 
        public class Vehiculo : EntityBase 
-    {
+       {
          [Required]
          [MaxLength(10, ErrorMessage = "La patente del vehiculo no debe superar los {1} caracteres")]
          public string Patente { get; set; }
@@ -29,8 +29,5 @@ namespace CobrarSeguros.BD.Data.entidades
 
         public Clientes Clientes {get; set; }
         public int ClientesId { get; set; }
-
-       
-
-    }
+       }
 }
