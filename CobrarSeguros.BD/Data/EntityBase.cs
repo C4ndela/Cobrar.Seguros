@@ -8,7 +8,7 @@ namespace CobrarSeguros.BD.Data
 {
     public class EntityBase
     {
-        public int ID { get; set; } 
+        public int Id { get; set; }
         public DateTime FechaCreacion { get; set; }
     }
 }

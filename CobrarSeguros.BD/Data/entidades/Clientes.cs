@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CobrarSeguros.BD.Data.entidades
 {
-    [Index(nameof(DNI), Name = "ClienteDNI_UQ", IsUnique = true)]
+    //[Index(nameof(DNI), Name = "ClienteDNI_UQ", IsUnique = true)]
     public class Clientes : EntityBase
     {
         [Required]

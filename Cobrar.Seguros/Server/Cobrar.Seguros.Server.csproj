@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CobrarSeguros.BD\CobrarSeguros.BD.csproj" />
+    <ProjectReference Include="..\..\CobrarSeguros.BD\CobrarSegurosBD.csproj" />
     <ProjectReference Include="..\Client\Cobrar.Seguros.Client.csproj" />
     <ProjectReference Include="..\Shared\Cobrar.Seguros.Shared.csproj" />
   </ItemGroup>

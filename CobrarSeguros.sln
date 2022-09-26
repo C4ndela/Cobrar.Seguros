@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cobrar.Seguros.Client", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cobrar.Seguros.Shared", "Cobrar.Seguros\Shared\Cobrar.Seguros.Shared.csproj", "{60A15BFD-F1A9-4799-B7F7-85C0F5383064}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CobrarSeguros.BD", "CobrarSeguros.BD\CobrarSeguros.BD.csproj", "{E88A676D-A49C-4A75-8641-6D1919294B48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CobrarSegurosBD", "CobrarSeguros.BD\CobrarSegurosBD.csproj", "{E88A676D-A49C-4A75-8641-6D1919294B48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

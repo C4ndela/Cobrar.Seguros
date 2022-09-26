@@ -26,13 +26,13 @@ namespace Cobrar.Seguros.Server.Controllers
         {
             try
             {
-                //var clienteActivoID = User.Claims.Where(c => c.Type == "clienteActivoID").Select(x => x.Value).FirstOrDefault();
+                //var clienteActivoId = User.Claims.Where(c => c.Type == "clienteActivoId").Select(x => x.Value).FirstOrDefault();
 
-                //if (clienteActivoID == null)
+                //if (clienteActivoId == null)
                 //    return NotFound("No se puede agregar el vehiculo");
 
                 ///*usa la cuenta activa para la carga del vehiculo bajo esa cuenta*/
-                //vehiculo.ClienteID = clienteActivoID;
+                //vehiculo.ClientesId = clienteActivoId;
 
 
                 context.Vehiculos.Add(vehiculo);
@@ -52,8 +52,8 @@ namespace Cobrar.Seguros.Server.Controllers
         public async Task<ActionResult<Vehiculo>> VehiculoPorPatente(string Patente)
         {
             var Vehiculo = await context.Vehiculos.Where
-                                   (p => p.Patente == Patente)
-                                   .Include(po => po.Poliza).FirstOrDefaultAsync();
+                                   (p => p.Patente == Patente).FirstOrDefaultAsync();
+                                   //.Include(po => po.Vehiculo).FirstOrDefaultAsync()
             if (Vehiculo == null)
             {
                 return NotFound($"No existe un vehiculo con patente= {Patente}");
@@ -61,52 +61,51 @@ namespace Cobrar.Seguros.Server.Controllers
             return Vehiculo;
         }
 
-        //[HttpGet("/Clientes")]
-        //public async Task<ActionResult<Vehiculo>> VehiculoPorClienteID(string ClienteID)
-        //{
-        //    var Vehiculo = await context.Vehiculos.Where
-        //                           (e => e.ClienteID == ClienteID)
-        //                           .Include(po => po.Poliza).FirstOrDefaultAsync();
-        //    if (Vehiculo == null)
-        //    {
-        //        return NotFound($"No existe un vehiculo con patente= {ClienteID}");
-        //    }
-        //    return Vehiculo;
-        //}
+        [HttpGet("/ClienteId")]
+        public async Task<ActionResult<Vehiculo>> VehiculoPorClienteId(int ClienteId)
+        {
+            var Vehiculo = await context.Vehiculos.Where
+                                   (c => c.ClientesId == ClienteId).FirstOrDefaultAsync();
+
+            if (Vehiculo == null)
+            {
+                return NotFound($"No existe un vehiculo con cliente numero id= {ClienteId}");
+            }
+            return Vehiculo;
+        }
         #endregion
 
         #region put
 
-        //[HttpPut("Patente:string")]
+        [HttpPut("Patente:string")]
 
-        //public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
-        //{
-        //    if (Patente != vehiculo.Patente)
-        //    {
-        //        return BadRequest("Datos incorrectos");
-        //    }
+        public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
+        {
+            if (Patente != vehiculo.Patente)
+            {
+                return BadRequest("Datos incorrectos");
+            }
 
-        //    var auto = context.Vehiculos.Where(e => e.Patente == Patente);
+            var autos = context.Vehiculos.Where(p => p.Patente == Patente);
 
-        //    if (auto == null)
-        //    {
-        //        return NotFound("No existe vehiculo a modificar");
-        //    }
+            if (autos == null)
+            {
+                return NotFound("No existe vehiculo a modificar");
+            }
 
-        //    auto.patente = Vehiculo.Patente;
+            autos.Sumasegurada = vehiculo.Sumasegurada;
 
-        //    try
-        //    {
-        //        context.Vehiculos.Update(Patente);
-        //        context.SaveChanges();
-        //        return Ok();
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest($"Lso datos no han sido actualizados por:{e.Message}");
-        //    }
-
-        //}
+            try
+            {
+                context.Vehiculos.Update(autos);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest($"Los datos no han sido actualizados por:{p.Message}");
+            }
+        }
 
         #endregion
 
@@ -115,7 +114,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
         public ActionResult Delete(int id)
         {
-            var auto = context.Vehiculos.Where(x => x.ID == id).FirstOrDefault();
+            var auto = context.Vehiculos.Where(x => x.Id == id).FirstOrDefault();
             if (auto == null)
             {
                 return NotFound($"El registro {id} no fue encontrado");
@@ -125,14 +124,13 @@ namespace Cobrar.Seguros.Server.Controllers
             {
                 context.Vehiculos.Remove(auto);
                 context.SaveChanges();
-                return Ok($"El registro {auto.Sumasegurada} ha sido borrado.");
+                return Ok($"El registro {auto.Patente} ha sido borrado.");
             }
             catch
             {
                 return BadRequest($"Los datos no han sido eliminados"); //AGREGAR (e.Message)
             }
         }
-
         #endregion
 
     }

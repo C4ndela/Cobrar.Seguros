@@ -43,11 +43,10 @@ namespace Cobrar.Seguros.Server.Controllers
             public async Task<ActionResult<Clientes>> ClienteporDNI(int DNI)
             {
                 var Vehiculo = await context.Cliente.Where
-                                       (d => d.DNI == DNI)
-                                       .Include(po => po.Vehiculos).FirstOrDefaultAsync();
+                                       (d => d.DNI == DNI).FirstOrDefaultAsync();
                 if (Vehiculo == null)
                 {
-                    return NotFound($"No existe un cleinte con DNI= {DNI}");
+                    return NotFound($"No existe un clinte con DNI= {DNI}");
                 }
                 return Vehiculo;
             }
@@ -58,7 +57,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
             public ActionResult Delete(int id)
             {
-                var persona = context.Cliente.Where(x => x.ID == id).FirstOrDefault();
+                var persona = context.Cliente.Where(x => x.Id == id).FirstOrDefault();
                 if (persona == null)
                 {
                     return NotFound($"El registro {id} no fue encontrado");
@@ -88,15 +87,7 @@ namespace Cobrar.Seguros.Server.Controllers
                 return true;
             }
 
-            //private bool UserExist  (int clienteID) // cpnfirma si existe un usuario por medio del id
-            //{
-            //    var user = context.Cliente.Where(u => u.ID == clienteID).FirstOrDefault();
-            //    if (user != null)
-            //        return false;
-            //    return true;
-            //}
-
             #endregion
         }
     }
-} 
+}  

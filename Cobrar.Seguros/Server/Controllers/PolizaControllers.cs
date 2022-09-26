@@ -40,25 +40,40 @@ namespace Cobrar.Seguros.Server.Controllers
             #region Get
 
             [HttpGet("/NroPoliza")]
-            public async Task<ActionResult<Poliza>> ClienteporDNI(string nroPoliza)
+            public async Task<ActionResult<Poliza>> PolizaporNumero(string nroPoliza)
             {
                 var Vehiculo = await context.Polizas.Where
-                                       (d => d.nroPoliza == nroPoliza)
-                                       .Include(po => po.Vehiculos).FirstOrDefaultAsync();
+                                       (d => d.nroPoliza == nroPoliza).FirstOrDefaultAsync();
+                                       //.Include(po => po.Vehiculos).FirstOrDefaultAsync();
                 if (Vehiculo == null)
                 {
                     return NotFound($"No existe un seguro con nro de poliza= {nroPoliza}");
                 }
                 return Vehiculo;
             }
-            #endregion
+
+            //[HttpGet("/VehiculoId")]
+            //public async Task<ActionResult<Poliza>> PolizaporVehiculo(int VehiculoId)
+            //{
+            //    var Poliza = await context.Polizas.Where
+            //                           (c => c.VehiculoId == VehiculoId).FirstOrDefaultAsync();
+
+            //    if (Poliza == null)
+
+            //        return NotFound($"No existe un vehiculo con cliente numero id= {VehiculoId}");
+            //}
+            //    return Poliza;
+            //}
+
+
+        #endregion
 
             #region delete
-            [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}")]
 
             public ActionResult Delete(int id)
             {
-                var seguro = context.Polizas.Where(x => x.ID == id).FirstOrDefault();
+                var seguro = context.Polizas.Where(x => x.Id == id).FirstOrDefault();
                 if (seguro == null)
                 {
                     return NotFound($"El registro {id} no fue encontrado");
