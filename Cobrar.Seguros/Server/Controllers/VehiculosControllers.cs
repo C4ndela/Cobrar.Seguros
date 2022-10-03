@@ -77,35 +77,35 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region put
 
-        //[HttpPut("Patente:string")]
+        [HttpPut("Patente:string")]
 
-        //public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
-        //{
-        //    if (Patente != vehiculo.Patente)
-        //    {
-        //        return BadRequest("Datos incorrectos");
-        //    }
+        public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
+        {
+            if (Patente != vehiculo.Patente)
+            {
+                return BadRequest("Datos incorrectos");
+            }
 
-        //    var autos = context.Vehiculos.Where(p => p.Patente == Patente);
+            var autos = context.Vehiculos.Where(p => p.Patente == Patente).FirstOrDefault();
 
-        //    if (autos == null)
-        //    {
-        //        return NotFound("No existe vehiculo a modificar");
-        //    }
+            if (autos == null)
+            {
+                return BadRequest("No existe vehiculo a modificar");
+            }
 
-        //    autos.Sumasegurada = vehiculo.Sumasegurada;
+            autos.Sumasegurada = vehiculo.Sumasegurada;
 
-        //    try
-        //    {
-        //        context.Vehiculos.Update(autos);
-        //        context.SaveChanges();
-        //        return Ok();
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest($"Los datos no han sido actualizados por:{p.Message}");
-        //    }
-        //}
+            try
+            {
+                context.Vehiculos.Update(autos);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Los datos no han sido actualizados por:{e.Message}");
+            }
+        }
 
         #endregion
 

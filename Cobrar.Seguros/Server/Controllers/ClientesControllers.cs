@@ -47,10 +47,45 @@ namespace Cobrar.Seguros.Server.Controllers
                 }
                 return Vehiculo;
             }
-            #endregion
+        #endregion
 
-            #region delete
-            [HttpDelete("{DNI:int}")]
+        #region put
+
+        [HttpPut("DNI:int")]
+
+        public ActionResult Put(int DNI, [FromBody] Clientes Cliente)
+        {
+            if (DNI != Cliente.DNI)
+            {
+                return BadRequest("Datos incorrectos");
+            }
+
+            var persona = context.Cliente.Where(n => n.DNI == DNI).FirstOrDefault();
+
+            if (DNI == null)
+            {
+                return BadRequest("No existe vehiculo a modificar");
+            }
+
+            persona.nroTelfonico = Cliente.nroTelfonico;
+          
+
+            try
+            {
+                context.Cliente.Update(persona);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Los datos no han sido actualizados por:{e.Message}");
+            }
+        }
+
+        #endregion
+
+        #region delete
+        [HttpDelete("{DNI:int}")]
 
             public ActionResult Delete(int DNI)
             {

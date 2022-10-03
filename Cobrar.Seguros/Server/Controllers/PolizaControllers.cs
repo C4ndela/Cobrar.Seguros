@@ -52,23 +52,59 @@ namespace Cobrar.Seguros.Server.Controllers
                 return Vehiculo;
             }
 
-            //[HttpGet("/VehiculoId")]
-            //public async Task<ActionResult<Poliza>> PolizaporVehiculo(int VehiculoId)
-            //{
-            //    var Poliza = await context.Polizas.Where
-            //                           (c => c.VehiculoId == VehiculoId).FirstOrDefaultAsync();
+        //[HttpGet("/VehiculoId")]
+        //public async Task<ActionResult<Poliza>> PolizaporVehiculo(int VehiculoId)
+        //{
+        //    var Poliza = await context.Polizas.Where
+        //                           (c => c.VehiculoId == VehiculoId).FirstOrDefaultAsync();
 
-            //    if (Poliza == null)
+        //    if (Poliza == null)
 
-            //        return NotFound($"No existe un vehiculo con cliente numero id= {VehiculoId}");
-            //}
-            //    return Poliza;
-            //}
+        //        return NotFound($"No existe un vehiculo con cliente numero id= {VehiculoId}");
+        //}
+        //    return Poliza;
+        //}
 
 
         #endregion
 
-            #region delete
+        #region put
+
+        [HttpPut("nroPoliza:string")]
+
+        public ActionResult Put(string nroPoliza, [FromBody] Poliza Polizas)
+        {
+            if (nroPoliza != Polizas.nroPoliza)
+            {
+                return BadRequest("Datos incorrectos");
+            }
+
+            var numeroPoli = context.Polizas.Where(n => n.nroPoliza == nroPoliza).FirstOrDefault();
+
+            if (numeroPoli == null)
+            {
+                return BadRequest("No existe vehiculo a modificar");
+            }
+
+            numeroPoli.nroPoliza = Polizas.nroPoliza;
+            numeroPoli.vigenciaPoliza = Polizas.vigenciaPoliza;
+            numeroPoli.tipoSeguro = Polizas.tipoSeguro; 
+
+            try
+            {
+                context.Polizas.Update(numeroPoli);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Los datos no han sido actualizados por:{e.Message}");
+            }
+        }
+
+        #endregion
+
+        #region delete
         [HttpDelete("{nroPoliza:string}")]
 
             public ActionResult Delete(string nroPoliza)
