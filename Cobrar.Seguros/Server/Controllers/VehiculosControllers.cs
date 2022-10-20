@@ -19,7 +19,6 @@ namespace Cobrar.Seguros.Server.Controllers
             this.context = context;
         }
 
-
         #region post
         [HttpPost]
         public async Task<ActionResult<Vehiculo>> Post(Vehiculo vehiculo)

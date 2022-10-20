@@ -17,7 +17,7 @@ namespace Cobrar.Seguros.Server.Controllers
                 this.context = context;
             }
 
-            #region post
+           #region post
             [HttpPost]
             public async Task<ActionResult<Clientes>> Post(Clientes cliente)
             {
@@ -34,7 +34,7 @@ namespace Cobrar.Seguros.Server.Controllers
             }
             #endregion
 
-            #region Get
+           #region Get
 
             [HttpGet("/DNI")]
             public async Task<ActionResult<Clientes>> ClienteporDNI(int DNI)
@@ -49,7 +49,7 @@ namespace Cobrar.Seguros.Server.Controllers
             }
         #endregion
 
-        #region put
+           #region put
 
         [HttpPut("DNI:int")]
 
@@ -84,7 +84,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #endregion
 
-        #region delete
+           #region delete
         [HttpDelete("{DNI:int}")]
 
             public ActionResult Delete(int DNI)
@@ -109,7 +109,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
             #endregion
 
-            #region metodos
+           #region metodos
 
             private bool UserExist(int DNI) //confirma si el usuario con DNI x existe
             {
