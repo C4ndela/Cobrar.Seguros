@@ -49,38 +49,38 @@ namespace Cobrar.Seguros.Server.Controllers
             }
         #endregion
 
-           #region put
+         #region put
 
-        [HttpPut("DNI:int")]
+        //[HttpPut("DNI:int")]
 
-        public ActionResult Put(int DNI, [FromBody] Clientes Cliente)
-        {
-            if (DNI != Cliente.DNI)
-            {
-                return BadRequest("Datos incorrectos");
-            }
+        //public ActionResult Put(int Id, [FromBody] Clientes Cliente)
+        //{
+        //    if (Id != Cliente.DNI)
+        //    {
+        //        return BadRequest("Datos incorrectos");
+        //    }
 
-            var persona = context.Cliente.Where(n => n.DNI == DNI).FirstOrDefault();
+        //    var persona = context.Cliente.Where(n => n.Id == Id).FirstOrDefault();
 
-            if (DNI == null)
-            {
-                return BadRequest("No existe vehiculo a modificar");
-            }
+        //    if (Id == null)
+        //    {
+        //        return BadRequest("No existe vehiculo a modificar");
+        //    }
 
-            persona.nroTelfonico = Cliente.nroTelfonico;
+        //    persona.nroTelfonico = Cliente.nroTelfonico;
           
 
-            try
-            {
-                context.Cliente.Update(persona);
-                context.SaveChanges();
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest($"Los datos no han sido actualizados por:{e.Message}");
-            }
-        }
+        //    try
+        //    {
+        //        context.Cliente.Update(persona);
+        //        context.SaveChanges();
+        //        return Ok();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest($"Los datos no han sido actualizados por:{e.Message}");
+        //    }
+        //}
 
         #endregion
 

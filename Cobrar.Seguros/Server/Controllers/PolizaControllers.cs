@@ -70,7 +70,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region put
 
-        [HttpPut("nroPoliza:string")]
+        [HttpPut("nroPoliza")]
 
         public ActionResult Put(string nroPoliza, [FromBody] Poliza Polizas)
         {
@@ -105,7 +105,7 @@ namespace Cobrar.Seguros.Server.Controllers
         #endregion
 
         #region delete
-        [HttpDelete("{nroPoliza:string}")]
+        [HttpDelete("{nroPoliza}")]
 
             public ActionResult Delete(string nroPoliza)
             {

@@ -25,15 +25,6 @@ namespace Cobrar.Seguros.Server.Controllers
         {
             try
             {
-                //var clienteActivoId = User.Claims.Where(c => c.Type == "clienteActivoId").Select(x => x.Value).FirstOrDefault();
-
-                //if (clienteActivoId == null)
-                //    return NotFound("No se puede agregar el vehiculo");
-
-                ///*usa la cuenta activa para la carga del vehiculo bajo esa cuenta*/
-                //vehiculo.ClientesId = clienteActivoId;
-
-
                 context.Vehiculos.Add(vehiculo);
                 await context.SaveChangesAsync();
                 return vehiculo;
@@ -76,7 +67,7 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region put
 
-        [HttpPut("Patente:string")]
+        [HttpPut("Patente")]
 
         public ActionResult Put(string Patente, [FromBody] Vehiculo vehiculo)
         {
@@ -109,7 +100,7 @@ namespace Cobrar.Seguros.Server.Controllers
         #endregion
 
         #region delete
-        [HttpDelete("{patente:string}")]
+        [HttpDelete("{patente}")]
 
         public ActionResult Delete(string Patente)
         {
