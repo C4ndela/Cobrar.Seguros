@@ -1,0 +1,25 @@
+﻿@page "/Cliente"
+@inject IHttpService http
+
+<h3>Cliente</h3>
+<p>hola cliente </p>
+
+
+@code {
+    List<Cliente> Clientes ;
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var respuesta = await http.Get<List<Cliente>>("api/Clientes"); 
+        if (respuesta.Error)
+        {
+            Clientes = respuesta.Respuesta; 
+        }
+    }
+}
