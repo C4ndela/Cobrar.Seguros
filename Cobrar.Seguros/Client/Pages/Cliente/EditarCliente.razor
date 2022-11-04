@@ -1,0 +1,23 @@
+﻿@page "/Cliente/Editar"
+@inject IHttpService http
+@inject NavigationManager navigationManager
+
+<h3>Nuevo Cliente</h3>
+
+<FormCliente clientes="clientes" onCancel="Cancelar" onValidSubmit="Grabar">
+
+</FormCliente>
+
+
+@code {
+    private Clientes clientes = new Clientes();
+
+    private void Grabar()
+    { 
+
+    }
+    private void Cancelar()
+    {
+
+    }
+}

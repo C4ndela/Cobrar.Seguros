@@ -1,12 +1,14 @@
 ﻿@page "/Cliente"
 @inject IHttpService http
+@using CobrarSeguros.BD.Data.entidades
 
 <h3>Cliente</h3>
 <p>hola cliente </p>
 
 
-@code {
-    List<Cliente> Clientes ;
+@code 
+{
+    List<Clientes> Clientes ;
 
     protected override async Task OnInitializedAsync()
     {
@@ -16,7 +18,7 @@
 
     private async Task Leer()
     {
-        var respuesta = await http.Get<List<Cliente>>("api/Clientes"); 
+        var respuesta = await http.Get<List<Clientes>>("api/Clientes"); 
         if (respuesta.Error)
         {
             Clientes = respuesta.Respuesta; 
