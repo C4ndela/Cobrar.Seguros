@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore; 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

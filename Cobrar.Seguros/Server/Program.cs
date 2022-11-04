@@ -13,7 +13,7 @@ builder.Services.AddControllersWithViews().AddJsonOptions(
    x => x.JsonSerializerOptions.ReferenceHandler  = ReferenceHandler.IgnoreCycles); //CONTROL RECURSIVIDIDAD ENTRE TABLA VEHICULO Y POLIZA
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-var conn = builder.Configuration.GetConnectionString("con");
+var conn = builder.Configuration.GetConnectionString("conexion");
 
 builder.Services.AddDbContext<BDcontext>(opciones =>
        opciones.UseSqlServer(conn));

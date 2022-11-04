@@ -5,36 +5,36 @@
 
         <label>DNI</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.DNI"/>
+            <InputNumber class="form-control" @bind-Value="@clientes.DNI" />
         </div>
 
         <label>Nombre</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.Nombre" />
+            <InputText class="form-control" @bind-Value="@clientes.Nombre" />
             <ValidationMessage For="@(() => clientes.Nombre)" />
         </div>
      
         <label>Apellido</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.Apellido" />
+            <InputText class="form-control" @bind-Value="@clientes.Apellido" />
             <ValidationMessage For="@(() => clientes.Apellido)" />
         </div>
 
         <label>Localidad</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.Localidad" />
+            <InputText class="form-control" @bind-Value="@clientes.Localidad" />
             <ValidationMessage For="@(() => clientes.Localidad)" />
         </div>
 
         <label>Domicilio</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.Domicilio" />
+            <InputText class="form-control" @bind-Value="@clientes.Domicilio" />
             <ValidationMessage For="@(() => clientes.Domicilio)" />
         </div>
 
           <label>nroTelfonico</label>
         <div>
-            <inputText class="form-control" @bind-Value="@clientes.nroTelfonico" />
+            <InputNumber class="form-control" @bind-Value="@clientes.nroTelfonico" />
      
          </div>
 
@@ -43,9 +43,7 @@
     <button class="btn btn-primary" type="submit">Aceptar</button>
     <button class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
 
-
 </EditForm>
-
 
 
 @code {
