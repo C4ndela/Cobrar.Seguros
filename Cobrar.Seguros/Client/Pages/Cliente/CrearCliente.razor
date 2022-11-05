@@ -12,9 +12,13 @@
 @code {
     private Clientes clientes = new Clientes();
 
-    private void Grabar()
+    private async void Grabar()
     {
-
+        var httpRespuesta = await http.Post<Cliente>("api/Clientes", clientes); 
+        if (httpRespuesta.Error)
+        {
+            var body = httpRespuesta.HttpResponseMessage; 
+        }
     }
     private void Cancelar()
     {

@@ -9,16 +9,16 @@ namespace Cobrar.Seguros.Server.Controllers
     [ApiController]
     [Route("api/Clientes")]
     [Authorize]
-        public class ClienteControllers : ControllerBase
+    public class ClienteControllers : ControllerBase
+    {
+        private readonly BDcontext context;
+        public ClienteControllers(BDcontext context)
         {
-            private readonly BDcontext context;
-            public ClienteControllers(BDcontext context)
-            {
-                this.context = context;
-            }
+            this.context = context;
+        }
 
-           #region post
-            [HttpPost]
+        #region post
+        [HttpPost]
             public async Task<ActionResult<Clientes>> Post(Clientes cliente)
             {
                 try
@@ -47,6 +47,7 @@ namespace Cobrar.Seguros.Server.Controllers
                 }
                 return Vehiculo;
             }
+
         #endregion
 
          #region put
@@ -111,13 +112,13 @@ namespace Cobrar.Seguros.Server.Controllers
 
            #region metodos
 
-            private bool UserExist(int DNI) //confirma si el usuario con DNI x existe
-            {
-                var user = context.Cliente.Where(u => u.DNI == DNI).FirstOrDefault();
-                if (user != null)
-                    return false;
-                return true;
-            }
+            //private bool UserExist(int DNI) //confirma si el usuario con DNI x existe
+            //{
+            //    var user = context.Cliente.Where(u => u.DNI == DNI).FirstOrDefault();
+            //    if (user != null)
+            //        return false;
+            //    return true;
+            //}
 
             #endregion
         }

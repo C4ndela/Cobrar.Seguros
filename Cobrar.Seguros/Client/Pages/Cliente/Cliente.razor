@@ -1,27 +1,61 @@
 ﻿@page "/Cliente"
 @inject IHttpService http
-@using CobrarSeguros.BD.Data.entidades
 
 <h3>Cliente</h3>
-<p>hola cliente </p>
+
+<a class="btn btn-primary" href="Cliente">
+    <span class="oi oi-plus" aria-hidden="true"></span>
+    Nuevo Cliente
+</a>
+
+<table>
+
+    @if (Clientes == null)
+    {
+        <tr>Cargando...</tr>
+    }
+    else if (Clientes.Count == 0)
+    {
+        <tr>Todavía no hay Clientes</tr>
+    }
+    else
+    {
+        @foreach (var item in Clientes)
+        {
+            <tr>
+                <td>@item.DNI</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellido</td>
+                <td>
+               @*     <button class="btn btn-danger"
+                      @onclick="()=>Eliminar(item)">
+                      Borrar
+                     </button>*@
+                </td>
+            </tr>
+        }
+    }
+</table>
 
 
 @code 
 {
-    List<Clientes> Clientes ;
+    List<Clientes> Clientes = new List<Clientes>();
 
     protected override async Task OnInitializedAsync()
     {
-        base.OnInitializedAsync();
+        await base.OnInitializedAsync();
         await Leer();
     }
 
     private async Task Leer()
     {
         var respuesta = await http.Get<List<Clientes>>("api/Clientes"); 
-        if (respuesta.Error)
+        if (!respuesta.Error)
         {
             Clientes = respuesta.Respuesta; 
         }
     }
 }
+
+
