@@ -14,14 +14,15 @@
 
     private async void Grabar()
     {
-        var httpRespuesta = await http.Post<Clientes>("api/Clientes", clientes); 
-        if (httpRespuesta.Error)
+        var respuesta = await http.Post<Clientes>("api/Clientes", clientes); 
+        if (respuesta.Error)
         {
-            var body = httpRespuesta.HttpResponseMessage; 
+            var body = respuesta.HttpResponseMessage; 
         }
+        navigationManager.NavigateTo("/Cliente"); 
     }
     private void Cancelar()
     {
-
+        navigationManager.NavigateTo("/Cliente");
     }
 }

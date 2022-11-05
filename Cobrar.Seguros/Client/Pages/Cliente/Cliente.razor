@@ -3,7 +3,7 @@
 
 <h3>Cliente</h3>
 
-<a class="btn btn-primary" href="Cliente">
+<a class="btn btn-primary" href="Cliente/Crear">
     <span class="oi oi-plus" aria-hidden="true"></span>
     Nuevo Cliente
 </a>
@@ -26,11 +26,21 @@
                 <td>@item.DNI</td>
                 <td>@item.Nombre</td>
                 <td>@item.Apellido</td>
-                <td>
-               @*     <button class="btn btn-danger"
+                <td>@item.Localidad</td>
+                <td>@item.Domicilio</td>
+                <td>@item.nroTelfonico</td>
+                <td>@item.Vehiculos</td>
+                @*<td>
+                    <button class="btn btn-danger"
                       @onclick="()=>Eliminar(item)">
                       Borrar
-                     </button>*@
+                     </button>
+                </td>*@
+                <td>
+                    <a class="btn btn-primary"
+                      href="Cliente/Editar/@item.DNI">
+                      Editar
+                    </a>
                 </td>
             </tr>
         }

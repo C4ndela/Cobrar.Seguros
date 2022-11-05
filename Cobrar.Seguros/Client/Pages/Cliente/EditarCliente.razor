@@ -1,8 +1,8 @@
-﻿@page "/Cliente/Editar"
+﻿@page "/Cliente/Editar/{clientesDNI:int}"
 @inject IHttpService http
 @inject NavigationManager navigationManager
 
-<h3>Nuevo Cliente</h3>
+<h3>Editar Cliente</h3>
 
 <FormCliente clientes="clientes" onCancel="Cancelar" onValidSubmit="Grabar">
 
@@ -10,7 +10,29 @@
 
 
 @code {
+
     private Clientes clientes = new Clientes();
+    [Parameter] public int clientesDNI { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+
+        var respuesta = await http.Get<Cliente>($"api/Clientes/ {clientesDNI}"); 
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+          //  clientes = respuesta.Respuesta; 
+        }
+    }
+
 
     private void Grabar()
     { 
@@ -18,6 +40,5 @@
     }
     private void Cancelar()
     {
-
-    }
+        navigationManager.NavigateTo("/Cliente"); }
 }
