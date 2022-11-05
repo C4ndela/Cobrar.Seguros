@@ -14,7 +14,7 @@
 
     private async void Grabar()
     {
-        var httpRespuesta = await http.Post<Cliente>("api/Clientes", clientes); 
+        var httpRespuesta = await http.Post<Clientes>("api/Clientes", clientes); 
         if (httpRespuesta.Error)
         {
             var body = httpRespuesta.HttpResponseMessage; 
