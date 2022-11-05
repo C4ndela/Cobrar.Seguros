@@ -1,0 +1,35 @@
+﻿<EditForm Model="vehiculos" >
+    <DataAnnotationsValidator/>
+  
+    <div class="form-group">
+        
+        <label>Patente</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@vehiculos.Patente" />
+        </div>
+
+        <label>Modelo</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@vehiculos.Modelo" />
+        </div>
+
+        <label>Año</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@vehiculos.Año" />
+        </div>
+
+        <label>SumaAesegurada</label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@vehiculos.Sumasegurada" />
+        </div>
+
+    </div>
+
+
+
+</EditForm>
+
+
+@code {
+    [Parameter] public Vehiculo vehiculos { get; set; }
+}

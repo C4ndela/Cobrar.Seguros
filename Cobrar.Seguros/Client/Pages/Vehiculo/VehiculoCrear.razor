@@ -1,0 +1,28 @@
+﻿@page "/Vehiculos/Crear"
+@inject IHttpService http
+@inject NavigationManager navigationManager
+
+<h3>Vehiculo</h3>
+
+<VehiculoForm vehiculos="vehiculos" onCancel="Cancelar" onValidSubmit="Grabar">
+
+</VehiculoForm>
+
+
+@code {
+    private Vehiculo vehiculos = new Vehiculo();
+
+    private async void Grabar()
+    {
+        var respuesta = await http.Post<Vehiculo>("api/Clientes", vehiculos);
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage; 
+        }
+        navigationManager.NavigateTo("/Cliente"); 
+    }
+    private void Cancelar()
+    {
+        navigationManager.NavigateTo("/Cliente");
+    }
+}

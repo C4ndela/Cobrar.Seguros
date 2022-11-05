@@ -42,6 +42,7 @@ namespace Cobrar.Seguros.Server.Controllers
             [HttpGet("/NroPoliza")]
             public async Task<ActionResult<Poliza>> PolizaporNumero(string nroPoliza)
             {
+
                 var Vehiculo = await context.Polizas.Where
                                        (d => d.nroPoliza == nroPoliza).FirstOrDefaultAsync();
                                        //.Include(po => po.Vehiculos).FirstOrDefaultAsync();

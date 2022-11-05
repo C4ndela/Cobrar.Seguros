@@ -1,0 +1,63 @@
+﻿@page "/Clientes/Vehiculos"
+@inject IHttpService http
+
+<h3>Vehiculos por DNI</h3>
+
+<table>
+    <tr>
+        <td>@clientes.DNI</td>
+    </tr>
+
+    <tr>
+
+        @foreach (var item in vehiculo)
+        {
+            if (item.ClientesId == clientesId)
+            {
+                <td>@item.Patente</td>
+                <td>@item.Año</td>
+                <td>@item.Modelo</td>
+                <td>@item.Sumasegurada</td>
+            }
+
+            <td>
+                <a class="btn btn-primary" href="/Vehiculos/Crear">
+                    <span class="oi oi-plus" aria-hidden="true"></span>
+                    Agregar vehiculo
+                </a>
+            </td>
+        }
+
+    </tr>
+
+</table>
+
+
+@code {
+
+    [Parameter] public int clientesId { get; set; }
+
+    List<Vehiculo> vehiculo;
+
+    private Clientes clientes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var respuesta = await http.Get<List<Vehiculo>>("api/Vehiculo");
+        if (!respuesta.Error)
+        {
+            vehiculo = respuesta.Respuesta;
+        }
+        var respuestaCliente = await http.Get<Clientes>($"api/Clientes/{clientesId}");
+        if (!respuesta.Error)
+        {
+            clientes = respuestaCliente.Respuesta;
+        }
+    }
+}

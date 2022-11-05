@@ -8,6 +8,7 @@
     Nuevo Cliente
 </a>
 
+
 <table>
 
     @if (Clientes == null)
@@ -39,9 +40,17 @@
                 <td>
                     <a class="btn btn-primary"
                       href="Cliente/Editar/@item.DNI">
-                      Editar
+                      Editar Datos
                     </a>
                 </td>
+
+                <td>
+                    <a class="btn btn-primary"
+                        href="Clientes/Vehiculos">
+                        Ver Vehiculos
+                    </a>
+                </td>
+
             </tr>
         }
     }
@@ -67,5 +76,3 @@
         }
     }
 }
-
-

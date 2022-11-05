@@ -84,6 +84,9 @@ namespace Cobrar.Seguros.Server.Controllers
             }
 
             autos.Sumasegurada = vehiculo.Sumasegurada;
+            autos.Año = vehiculo.Año;
+            autos.Modelo = vehiculo.Modelo;
+            autos.Patente = vehiculo.Patente;
 
             try
             {

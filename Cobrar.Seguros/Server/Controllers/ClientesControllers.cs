@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cobrar.Seguros.Server.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/Clientes")]
-    [Authorize]
     public class ClienteControllers : ControllerBase
     {
         private readonly BDcontext context;
@@ -19,13 +19,13 @@ namespace Cobrar.Seguros.Server.Controllers
 
         #region post
         [HttpPost]
-            public async Task<ActionResult<Clientes>> Post(Clientes cliente)
+            public async Task<ActionResult<int>> Post(Clientes cliente)
             {
                 try
                 {
                     context.Cliente.Add(cliente);
                     await context.SaveChangesAsync();
-                    return cliente;
+                    return cliente.Id;
                 }
                 catch (Exception e)
                 {
@@ -68,8 +68,11 @@ namespace Cobrar.Seguros.Server.Controllers
                 return BadRequest("No existe vehiculo a modificar");
             }
 
-            persona.nroTelfonico = Cliente.nroTelfonico;
 
+            persona.nroTelfonico = Cliente.nroTelfonico;
+            persona.Localidad = Cliente.Localidad;
+            persona.Domicilio = Cliente.Domicilio;
+          
 
             try
             {

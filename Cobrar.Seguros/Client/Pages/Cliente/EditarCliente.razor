@@ -22,14 +22,14 @@
     private async Task Mostrar()
     {
 
-        var respuesta = await http.Get<Cliente>($"api/Clientes/ {clientesDNI}"); 
+        var respuesta = await http.Get<Clientes>($"api/Clientes/{clientesDNI}"); 
         if (respuesta.Error)
         {
             var body = respuesta.HttpResponseMessage;
         }
         else
         {
-          //  clientes = respuesta.Respuesta; 
+           clientes = respuesta.Respuesta; 
         }
     }
 
