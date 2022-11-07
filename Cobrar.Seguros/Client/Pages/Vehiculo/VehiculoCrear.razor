@@ -14,15 +14,15 @@
 
     private async void Grabar()
     {
-        var respuesta = await http.Post<Vehiculo>("api/Clientes", vehiculos);
+        var respuesta = await http.Post<Vehiculo>("api/Vehiculo", vehiculos);
         if (respuesta.Error)
         {
             var body = respuesta.HttpResponseMessage; 
         }
-        navigationManager.NavigateTo("/Cliente"); 
+        navigationManager.NavigateTo("/Vehiculos"); 
     }
     private void Cancelar()
     {
-        navigationManager.NavigateTo("/Cliente");
+        navigationManager.NavigateTo("/Vehiculos");
     }
 }

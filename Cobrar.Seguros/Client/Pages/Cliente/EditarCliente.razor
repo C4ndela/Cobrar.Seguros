@@ -34,11 +34,18 @@
     }
 
 
-    private void Grabar()
+    private async void Grabar()
     { 
+        var respuesta = await http.Put<Cliente>($"api/Clientes/{clientesDNI}",
+                                              clientes);
 
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Clientes");
     }
     private void Cancelar()
     {
-        navigationManager.NavigateTo("/Cliente"); }
+        navigationManager.NavigateTo("/Clientes"); }
 }

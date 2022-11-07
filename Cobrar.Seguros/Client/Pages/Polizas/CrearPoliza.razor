@@ -1,0 +1,28 @@
+﻿@page "/Polizas/Crear"
+@inject IHttpService http
+@inject NavigationManager navigationManager
+
+<h3>Crear Poliza</h3>
+
+<FormPoliza poliza="poliza" onCancel="Cancelar" onValidSubmit="Grabar">
+
+</FormPoliza>
+
+
+@code {
+    private Poliza poliza = new Poliza();
+
+    private async void Grabar()
+    {
+        var respuesta = await http.Post<Poliza>("api/Poliza", poliza); 
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage; 
+        }
+        navigationManager.NavigateTo("/Polizas"); 
+    }
+    private void Cancelar()
+    {
+        navigationManager.NavigateTo("/Polizas");
+    }
+}

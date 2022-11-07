@@ -1,0 +1,70 @@
+﻿@page "/Polizas"
+@inject IHttpService http
+@inject NavigationManager navigationManager
+
+
+<h1>Poliza por patente</h1>
+
+<table>
+    <tr>
+        <td>@vehiculo.Id</td>
+    </tr>
+
+    <tr>
+
+        @foreach (var item in poliza)
+        {
+            if (item.VehiculoId == VehiculoId)
+            {
+                <td>@item.empresaAseguradora</td>
+                <td>@item.tipoSeguro</td>
+                <td>@item.nroPoliza</td>
+                <td>@item.periodoPoliza</td>
+                <td>@item.vigenciaPoliza</td>
+                <td>@item.vencimientoFactura</td>
+                <td>@item.linkAsegurador</td>
+                <td>@item.Estado</td>
+
+            }
+
+            <td>
+                <a class="btn btn-primary" href="Polizas/Editar/{polizanroPoliza:int}">
+                    <span class="oi oi-plus" aria-hidden="true"></span>
+                    Editar Poliza
+                </a>
+            </td>
+        }
+
+    </tr>
+
+</table>
+
+
+@code {
+
+    [Parameter] public int VehiculoId { get; set; }
+
+    List<Poliza> poliza;
+
+    private Vehiculo vehiculo;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var respuesta = await http.Get<List<Poliza>>("api/Poliza");
+        if (!respuesta.Error)
+        {
+            poliza = respuesta.Respuesta;
+        }
+        var respuestaVehiculo = await http.Get<Vehiculo>($"api/Poliza/{VehiculoId}");
+        if (!respuesta.Error)
+        {
+            vehiculo = respuestaVehiculo.Respuesta;
+        }
+    }
+}

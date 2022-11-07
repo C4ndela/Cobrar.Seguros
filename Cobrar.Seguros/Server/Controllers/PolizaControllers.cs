@@ -10,68 +10,70 @@ namespace Cobrar.Seguros.Server.Controllers
     [Route("api/Poliza")]
     [Authorize]
 
- 
-        public class PolizaControllrs : ControllerBase
+
+    public class PolizaControllrs : ControllerBase
+    {
+        private readonly BDcontext context;
+
+        public PolizaControllrs(BDcontext context)
         {
-            private readonly BDcontext context;
+            this.context = context;
+        }
 
-            public PolizaControllrs(BDcontext context)
+        #region post
+        [HttpPost]
+        public async Task<ActionResult<Poliza>> Post(Poliza poliza)
+        {
+            try
             {
-                this.context = context;
+                context.Polizas.Add(poliza);
+                await context.SaveChangesAsync();
+                return poliza;
             }
-
-            #region post
-            [HttpPost]
-            public async Task<ActionResult<Poliza>> Post(Poliza poliza)
+            catch (Exception e)
             {
-                try
-                {
-                    context.Polizas.Add(poliza);
-                    await context.SaveChangesAsync();
-                    return poliza;
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                }
+                return BadRequest(e.Message);
             }
-            #endregion
-
-            #region Get
-
-            [HttpGet("/NroPoliza")]
-            public async Task<ActionResult<Poliza>> PolizaporNumero(string nroPoliza)
-            {
-
-                var Vehiculo = await context.Polizas.Where
-                                       (d => d.nroPoliza == nroPoliza).FirstOrDefaultAsync();
-                                       //.Include(po => po.Vehiculos).FirstOrDefaultAsync();
-                if (Vehiculo == null)
-                {
-                    return NotFound($"No existe un seguro con nro de poliza= {nroPoliza}");
-                }
-                return Vehiculo;
-            }
-
-        //[HttpGet("/VehiculoId")]
-        //public async Task<ActionResult<Poliza>> PolizaporVehiculo(int VehiculoId)
-        //{
-        //    var Poliza = await context.Polizas.Where
-        //                           (c => c.VehiculoId == VehiculoId).FirstOrDefaultAsync();
-
-        //    if (Poliza == null)
-
-        //        return NotFound($"No existe un vehiculo con cliente numero id= {VehiculoId}");
-        //}
-        //    return Poliza;
-        //}
-
-
+        }
         #endregion
 
-        #region put
+        #region Get
 
-        [HttpPut("nroPoliza")]
+        [HttpGet("/NroPoliza")]
+        public async Task<ActionResult<Poliza>> PolizaporNumero(string nroPoliza)
+        {
+
+            var Vehiculo = await context.Polizas.Where
+                                   (d => d.nroPoliza == nroPoliza).FirstOrDefaultAsync();
+            //.Include(po => po.Vehiculos).FirstOrDefaultAsync();
+            if (Vehiculo == null)
+            {
+                return NotFound($"No existe un seguro con nro de poliza= {nroPoliza}");
+            }
+            return Vehiculo;
+        }
+
+        [HttpGet("/VehiculoId")]
+        public async Task<ActionResult<Poliza>> PolizaporVehiculo(int VehiculoId)
+        {
+            var Poliza = await context.Polizas.Where
+                                   (c => c.VehiculoId == VehiculoId).FirstOrDefaultAsync();
+
+            if (Poliza == null)
+            {
+                return NotFound($"No existe un vehiculo con cliente numero id= {VehiculoId}");
+            }
+            return Poliza;
+        }
+
+        
+
+
+    #endregion
+
+    #region put
+
+    [HttpPut("nroPoliza")]
 
         public ActionResult Put(string nroPoliza, [FromBody] Poliza Polizas)
         {

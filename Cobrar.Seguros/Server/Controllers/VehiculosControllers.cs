@@ -43,7 +43,7 @@ namespace Cobrar.Seguros.Server.Controllers
         {
             var Vehiculo = await context.Vehiculos.Where
                                    (p => p.Patente == Patente).FirstOrDefaultAsync();
-                                   //.Include(po => po.Vehiculo).FirstOrDefaultAsync()
+                                
             if (Vehiculo == null)
             {
                 return NotFound($"No existe un vehiculo con patente= {Patente}");

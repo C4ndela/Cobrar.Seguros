@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -47,6 +48,29 @@ namespace Cobrar.Seguros.Client.Sevicios
             {
                 throw; 
             }
+        }
+
+
+        public async Task<HttpRespuesta<object>> Put <T> (string url, T enviar)
+            {
+            try
+            {
+                var enviaJson = JsonSerializer.Serialize(enviar);
+                var enviarContent = new StringContent(enviaJson,
+                                                      Encoding.UTF8,
+                                                      "aplication/json");
+
+                var respuesta = await http.PutAsync(url, enviarContent);
+                return new HttpRespuesta<object>(null,
+                                                 !respuesta.IsSuccessStatusCode,
+                                                 respuesta); 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         private async Task<T> DeserializarRespuesta<T>(HttpResponseMessage response)

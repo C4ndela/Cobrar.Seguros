@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Shared\Cobrar.Seguros.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Polizas\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,51 @@
+﻿@page "/Polizas/Editar/{polizanroPoliza:int}"
+@inject IHttpService http
+@inject NavigationManager navigationManager
+
+<h3>Editar Poliza</h3>
+
+<FormPoliza poliza="poliza" onCancel="Cancelar" onValidSubmit="Grabar">
+
+</FormPoliza>
+
+
+@code {
+
+    private Poliza poliza = new Poliza();
+    [Parameter] public int polizanroPoliza { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+
+        var respuesta = await http.Get<Poliza>($"api/Poliza/{polizanroPoliza}");
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            poliza = respuesta.Respuesta; 
+        }
+    }
+
+
+    private async void Grabar()
+    {
+        var respuesta = await http.Put<Poliza>($"api/Poliza/{polizanroPoliza}",
+                                               poliza);
+
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Polizas");
+    }
+        private void Cancelar()
+    {
+        navigationManager.NavigateTo("/Polizas"); }
+    }

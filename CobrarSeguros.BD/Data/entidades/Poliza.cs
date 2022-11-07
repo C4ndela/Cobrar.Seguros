@@ -40,6 +40,9 @@ namespace CobrarSeguros.BD.Data.entidades
         [Required]
         public string linkAsegurador { get; set; }
 
+        [Required]
+        public bool Estado { get; set; }
+
         //[ForeignKey("Vehiculo")]
 
 
