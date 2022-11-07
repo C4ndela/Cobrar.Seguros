@@ -36,7 +36,7 @@
 
     private async void Grabar()
     {
-        var respuesta = await http.Put<Cliente>($"api/Clientes/{clienteDNI}",
+        var respuesta = await http.Put<Clientes>($"api/Clientes/{clienteDNI}",
                                               cliente);
 
         if (respuesta.Error)

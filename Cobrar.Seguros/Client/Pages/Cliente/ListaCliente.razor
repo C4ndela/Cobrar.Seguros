@@ -32,21 +32,21 @@
                 <td>@item.nroTelfonico</td>
 
                 @*<td>
-                    <button class="btn btn-danger"
-                      @onclick="()=>Eliminar(item)">
-                      Borrar
-                     </button>
-                </td>*@
+        <button class="btn btn-danger"
+        @onclick="()=>Eliminar(item)">
+        Borrar
+        </button>
+        </td>*@
                 <td>
                     <a class="btn btn-primary"
-                      href="Cliente/Editar/@item.DNI">
-                      Editar Datos
+               href="Cliente/Editar/@item.DNI">
+                        Editar Datos
                     </a>
                 </td>
 
                 <td>
                     <a class="btn btn-primary"
-                        href="Vehiculos">
+               href="Vehiculos">
                         Ver Vehiculos
                     </a>
                 </td>
@@ -57,7 +57,7 @@
 </table>
 
 
-@code 
+@code
 {
     List<Clientes> Clientes = new List<Clientes>();
 
@@ -69,10 +69,10 @@
 
     private async Task Leer()
     {
-        var respuesta = await http.Get<List<Clientes>>("api/Clientes"); 
+        var respuesta = await http.Get<List<Clientes>>("api/Clientes");
         if (!respuesta.Error)
         {
-            Clientes = respuesta.Respuesta; 
+            Clientes = respuesta.Respuesta;
         }
     }
 }
