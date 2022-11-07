@@ -4,15 +4,15 @@
 
 <h3>Editar Cliente</h3>
 
-<FormCliente clientes="clientes" onCancel="Cancelar" onValidSubmit="Grabar">
+<FormCliente clientes="cliente" onCancel="Cancelar" onValidSubmit="Grabar">
 
 </FormCliente>
 
 
 @code {
 
-    private Clientes clientes = new Clientes();
-    [Parameter] public int clientesDNI { get; set; }
+    private Clientes cliente = new Clientes();
+    [Parameter] public int clienteDNI { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -22,22 +22,22 @@
     private async Task Mostrar()
     {
 
-        var respuesta = await http.Get<Clientes>($"api/Clientes/{clientesDNI}"); 
+        var respuesta = await http.Get<Clientes>($"api/Clientes/{clienteDNI}"); 
         if (respuesta.Error)
         {
             var body = respuesta.HttpResponseMessage;
         }
         else
         {
-           clientes = respuesta.Respuesta; 
+            cliente = respuesta.Respuesta; 
         }
     }
 
 
     private async void Grabar()
-    { 
-        var respuesta = await http.Put<Cliente>($"api/Clientes/{clientesDNI}",
-                                              clientes);
+    {
+        var respuesta = await http.Put<Cliente>($"api/Clientes/{clienteDNI}",
+                                              cliente);
 
         if (respuesta.Error)
         {
